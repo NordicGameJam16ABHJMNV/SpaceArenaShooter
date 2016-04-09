@@ -4,7 +4,7 @@ using System.Collections;
 public class AirTankLogic : MonoBehaviour {
 
     public GameObject SpaceShip;
-    private int Holes;
+    private int Holes ;
     public float Air = 1000;
     public float AirConsuming = 0.1f;
 
@@ -13,17 +13,12 @@ public class AirTankLogic : MonoBehaviour {
         this.SpaceShip = SpaceShip;
         this.Air = Air;
     }
-
-	// Use this for initialization
-	void Start () {
-        Holes = 0;
-	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Air < 0)
         {
-            Destroy(GetComponent<GameObject>());
+            Destroy(SpaceShip);
         }
         //Consumes Air
         Air -= AirConsuming + Holes * AirConsuming;
@@ -39,5 +34,10 @@ public class AirTankLogic : MonoBehaviour {
     {
         if (Holes >= Number)
         Holes -= Number;
+    }
+
+    public int getHoles()
+    {
+        return Holes;
     }
 }

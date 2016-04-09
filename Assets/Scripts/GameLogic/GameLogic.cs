@@ -68,6 +68,7 @@ public class GameLogic: MonoBehaviour
             Destroy(Players[i].Gui);
             Destroy(Players[i].Ship);
         }
+        Players.Clear();
         PlayerCount = 0;
         TitleText.text = "Game Over";
         gui.SetActive(true);
