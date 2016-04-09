@@ -16,10 +16,21 @@ public class AirTankLogic : MonoBehaviour {
 	void Update () {
         if (Air < 0)
         {
-            //GameOverCalled
+            Destroy(GetComponent<GameObject>());
         }
         //Consumes Air
-        Air =- AirConsuming + Holes * AirConsuming;
+        Air -= AirConsuming + Holes * AirConsuming;
         //Updates Container
 	}
+
+    public void AddHole(int Number)
+    {
+        Holes += Number;
+    }
+
+    public void CloseHole(int Number)
+    {
+        if (Holes >= Number)
+        Holes -= Number;
+    }
 }

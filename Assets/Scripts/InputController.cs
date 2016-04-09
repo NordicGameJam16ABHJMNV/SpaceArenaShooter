@@ -16,7 +16,7 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InitGame initGameScript = GameObject.Find("Game").GetComponent<InitGame>();
+        GameLogic initGameScript = GameObject.Find("Game").GetComponent<GameLogic>();
         List<Player> players = initGameScript.getPlayers();
 
         for (int i = 0; initGameScript.getPlayerCount()-1 > i; i++)
