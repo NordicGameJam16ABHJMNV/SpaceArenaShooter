@@ -17,18 +17,21 @@ public class InputController : MonoBehaviour
     void Update()
     {
         GameLogic initGameScript = GameObject.Find("Game").GetComponent<GameLogic>();
-        List<Player> players = initGameScript.getPlayers();
 
-        for (int i = 0; initGameScript.getPlayerCount()-1 > i; i++)
+        for (int i = 0; initGameScript.getPlayerCount() > i; i++)
         {
-            PlayerController script = players[i].Ship.GetComponent<PlayerController>();
-
-            Vector2 input = new Vector2(Input.GetAxis("HorizontalP" + (i + 1)), Input.GetAxis("VerticalP" + (i + 1)));
-
-            script.Move(input);
-            if (Input.GetKey("joystick " + (i + 1) + " button 0"))
+            GameObject playerShip = GameObject.Find("Player_" + i);
+            if (playerShip != null)
             {
-                script.Shoot();
+                PlayerController script = playerShip.GetComponent<PlayerController>();
+
+                Vector2 input = new Vector2(Input.GetAxis("HorizontalP" + (i + 1)), Input.GetAxis("VerticalP" + (i + 1)));
+
+                script.Move(input);
+                if (Input.GetKey("joystick " + (i + 1) + " button 0"))
+                {
+                    script.Shoot();
+                }
             }
         }
 
