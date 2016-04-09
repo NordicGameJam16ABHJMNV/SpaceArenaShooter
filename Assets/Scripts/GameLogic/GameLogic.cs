@@ -50,12 +50,14 @@ public class GameLogic: MonoBehaviour
     //Creating Players
     void CreatePlayer()
     {
-        Players.Add(new Player()
+        Player currentPlayer = new Player()
         {
             PlayerID = PlayerCount,
             Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount], Quaternion.identity) as GameObject,
             GUI = Instantiate(PlayerGUI, PlayerGuiPosition[PlayerCount], Quaternion.identity) as GameObject,
-        });
+        };
+        Players.Add(currentPlayer);
+        currentPlayer.Ship.name = "Player_" + PlayerCount;
         PlayerCount++;
     }
 
