@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InputController : MonoBehaviour
 {
@@ -15,19 +16,19 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        InitGame initGameScript = GameObject.Find("Game").GetComponent<InitGame>();
+        List<Player> players = initGameScript.getPlayers();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; initGameScript.getPlayerCount()-1 > i; i++)
         {
-            //GameObject obj = GameObject.Find("Spaceship_" + (i));
-
-            //PlayerController script = obj.GetComponent<PlayerController>();
+            PlayerController script = players[i].Ship.GetComponent<PlayerController>();
 
             Vector2 input = new Vector2(Input.GetAxis("HorizontalP" + (i + 1)), Input.GetAxis("VerticalP" + (i + 1)));
 
-            //script.Move(input);
+            script.Move(input);
             if (Input.GetKey("joystick " + (i + 1) + " button 0"))
             {
-              //  script.Shoot();
+                script.Shoot();
             }
         }
 

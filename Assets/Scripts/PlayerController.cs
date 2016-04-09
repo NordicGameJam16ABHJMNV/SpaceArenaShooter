@@ -22,16 +22,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
-        //Movement is called by InputController script
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
-        if (Input.GetButton("Fire1"))
-        {
-            Shoot();
-        }
-        Move(new Vector2(xInput, yInput));
-#endif
+//#if UNITY_EDITOR
+//        //Movement is called by InputController script
+//        float xInput = Input.GetAxis("Horizontal");
+//        float yInput = Input.GetAxis("Vertical");
+//        if (Input.GetButton("Fire1"))
+//        {
+//            Shoot();
+//        }
+//        Move(new Vector2(xInput, yInput));
+//#endif
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //Destroy(gameObject);
     }
 
     internal void Move(Vector2 input)
