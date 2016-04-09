@@ -6,7 +6,7 @@ public class InitGame : MonoBehaviour {
 
     public GameObject SpaceShip;
     public GameObject PlayerGUI;
-    public GameObject GUI;
+    public GameObject gui;
     public List<Vector3> PlayerPossition;
 
 
@@ -23,7 +23,7 @@ public class InitGame : MonoBehaviour {
 
     // Use this for initialization
     void Init() {
-        GUI.SetActive(false);
+        gui.SetActive(false);
         Players.Add(new Player()
         {
             PlayerID = PlayerCount,

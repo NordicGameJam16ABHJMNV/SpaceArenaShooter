@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GUI : MonoBehaviour
 {
-
+    private GameObject gui;
     //Initiate New Game
     void InitGame()
     {
-        //RemoveMenuGui
-        //CreateArena
-        //CreateObstackle
-        //CreatePlayers
-        //CreateGUI
+        gui = GetComponent<GameObject>();
     }
 
     //GameOver or Win
-    void GameOver()
+    public void GameOver()
     {
-        //TODO
+        var text = GetComponentInChildren<Text>();
+        gui.SetActive(true);
     }
 
     //Air Tank
