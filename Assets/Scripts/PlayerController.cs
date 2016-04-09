@@ -3,32 +3,34 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxSpeed = 10f;
-    public float timeToMaxSpeed = 1f;
+    
+    public float friction = 1;
+    public float acceleration = 10;
 
-    private float velocity = 0f; //TODO: MAKE CALCULATION!
-    private float friction;
+    private Rigidbody2D body;
 
-
-    // MaxSpeed = velocity/friction
-    // Time to max speed = 2.0/friction
-    // velocity = acceleration / fiction
-
-    //velocity =+ acceleration * deltatime
-    //velocity =- velocity * friction * deltatime
-
-
+   
     // Use this for initialization
     void Start()
     {
-        friction = 2.0f / timeToMaxSpeed;
-
+        body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int acceleration;
+#if UNITY_EDITOR
+        //Movement is called by InputController script
+        float xInput = Input.GetAxis("Horizontal");
+        float yInput = Input.GetAxis("Vertical");
+        Move(new Vector2(xInput, yInput));
+#endif
+    }
 
+    internal void Move(Vector2 input)
+    {
+        body.velocity -= body.velocity * friction * Time.deltaTime;
+
+        body.velocity += input * acceleration * Time.deltaTime;
     }
 }
