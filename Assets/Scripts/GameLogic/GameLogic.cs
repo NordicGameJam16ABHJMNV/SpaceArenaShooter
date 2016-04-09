@@ -54,8 +54,9 @@ public class GameLogic: MonoBehaviour
         {
             PlayerID = PlayerCount,
             Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount], Quaternion.identity) as GameObject,
-            GUI = Instantiate(PlayerGUI, PlayerGuiPosition[PlayerCount], Quaternion.identity) as GameObject,
+            Gui = Instantiate(PlayerGUI, PlayerGuiPosition[PlayerCount], Quaternion.identity) as GameObject,
         });
+        Players[PlayerCount].Gui.AddComponent<AirTankLogic>().Init(Players[PlayerCount].Ship, 1000f);
         PlayerCount++;
     }
 
@@ -64,7 +65,7 @@ public class GameLogic: MonoBehaviour
     {
         for (var i = 0; i <= PlayerCount; i++)
         {
-            Destroy(Players[i].GUI);
+            Destroy(Players[i].Gui);
             Destroy(Players[i].Ship);
         }
         PlayerCount = 0;
@@ -101,5 +102,5 @@ public class Player
 {
     public int PlayerID { get; set; }
     public GameObject Ship { get; set; }
-    public GameObject GUI { get; set; }
+    public GameObject Gui { get; set; }
 }

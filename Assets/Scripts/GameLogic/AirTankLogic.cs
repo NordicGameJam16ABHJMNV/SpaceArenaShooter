@@ -3,9 +3,16 @@ using System.Collections;
 
 public class AirTankLogic : MonoBehaviour {
 
+    public GameObject SpaceShip;
     private int Holes;
     public float Air = 1000;
     public float AirConsuming = 0.1f;
+
+    public void Init(GameObject SpaceShip, float Air)
+    {
+        this.SpaceShip = SpaceShip;
+        this.Air = Air;
+    }
 
 	// Use this for initialization
 	void Start () {
