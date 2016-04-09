@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class InitGame : MonoBehaviour {
+public class InitGame : MonoBehaviour
+{
 
     public GameObject SpaceShip;
     public GameObject PlayerGUI;
@@ -13,7 +14,7 @@ public class InitGame : MonoBehaviour {
     public int PlayerCount = 1;
     private List<Player> Players = new List<Player>();
     private Button myButton;
-    
+
 
     void Awake()
     {
@@ -22,28 +23,34 @@ public class InitGame : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Init() {
+    void Init()
+    {
         gui.SetActive(false);
-        PlayerCount++;
 
         Players.Add(new Player()
         {
             PlayerID = PlayerCount,
-            Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount -1], Quaternion.identity) as GameObject,
+            Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount - 1], Quaternion.identity) as GameObject,
             GUI = Instantiate(PlayerGUI, PlayerPossition[PlayerCount - 1], Quaternion.identity) as GameObject,
         });
+        PlayerCount++;
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
-        while (PlayerCount < 5 && PlayerCount > 1) { 
-            Players.Add(new Player()
+    void FixedUpdate()
+    {
+        while (PlayerCount < 5 && PlayerCount > 1)
+        {
+            Player currentPlayer = new Player()
             {
                 PlayerID = PlayerCount,
                 Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount - 1], Quaternion.identity) as GameObject,
                 GUI = Instantiate(PlayerGUI, PlayerPossition[PlayerCount - 1], Quaternion.identity) as GameObject,
-            });
-        PlayerCount++;
+            };
+            currentPlayer.Ship.name = "Player_" + PlayerCount;
+            Players.Add(currentPlayer);
+
+            PlayerCount++;
         }
     }
 

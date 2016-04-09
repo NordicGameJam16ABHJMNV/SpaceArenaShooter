@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 10f;
     public float rotationSpeed = 100f;
     public float reloadDelay = 1.0f;
+    public float bulletspeed = 20.0f;
 
     private Rigidbody2D body;
 
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     internal void Move(Vector2 input)
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
             Vector3 missileSpawnPosition = transform.position + transform.up * 2;
             GameObject missile = Instantiate(missilePrefab, missileSpawnPosition, transform.rotation) as GameObject;
             Destroy(missile, 2f);
-            missile.GetComponent<Rigidbody2D>().velocity = transform.up * 20;
+            missile.GetComponent<Rigidbody2D>().velocity = transform.up * bulletspeed;
         }
     }
 
