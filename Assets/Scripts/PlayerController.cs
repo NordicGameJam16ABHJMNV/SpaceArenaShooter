@@ -21,8 +21,12 @@ public class PlayerController : MonoBehaviour
     {
 #if UNITY_EDITOR
         //Movement is called by InputController script
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+        float xInput = Input.GetAxis("HorizontalP1");
+        float yInput = Input.GetAxis("VerticalP1"); //negative cause InputManager is dumb..
+        if (Input.GetKey("joystick button 0"))
+        {
+            Debug.Log("Key was pressed");
+        }
         Move(new Vector2(xInput, yInput));
 #endif
     }
