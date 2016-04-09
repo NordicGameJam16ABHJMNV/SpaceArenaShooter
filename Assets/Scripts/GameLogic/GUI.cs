@@ -4,15 +4,6 @@ using System.Collections;
 public class GUI : MonoBehaviour
 {
 
-    //USE:
-    //Make logic to reset the level and keep track of scores, number of players etc.
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     //Initiate New Game
     void InitGame()
     {
