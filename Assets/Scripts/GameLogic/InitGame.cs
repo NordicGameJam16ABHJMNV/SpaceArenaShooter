@@ -10,27 +10,28 @@ public class InitGame : MonoBehaviour {
     public List<Vector3> PlayerPossition;
 
 
-    private int PlayerCount = 1;
+    public int PlayerCount = 1;
     private List<Player> Players = new List<Player>();
     private Button myButton;
     
 
     void Awake()
     {
-        myButton = GetComponent<Button>();
+        myButton = GameObject.Find("Start").GetComponent<Button>();
         myButton.onClick.AddListener(Init);
     }
 
     // Use this for initialization
     void Init() {
         gui.SetActive(false);
+        PlayerCount++;
+
         Players.Add(new Player()
         {
             PlayerID = PlayerCount,
             Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount -1], Quaternion.identity) as GameObject,
             GUI = Instantiate(PlayerGUI, PlayerPossition[PlayerCount - 1], Quaternion.identity) as GameObject,
         });
-        PlayerCount++;
     }
 
     // Update is called once per frame
