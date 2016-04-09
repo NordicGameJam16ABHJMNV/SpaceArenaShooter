@@ -50,12 +50,14 @@ public class GameLogic: MonoBehaviour
     //Creating Players
     void CreatePlayer()
     {
-        Players.Add(new Player()
+        Player player = new Player()
         {
             PlayerID = PlayerCount,
             Ship = Instantiate(SpaceShip, PlayerPossition[PlayerCount], Quaternion.identity) as GameObject,
             Gui = Instantiate(PlayerGUI, PlayerGuiPosition[PlayerCount], Quaternion.identity) as GameObject,
-        });
+        };
+        Players.Add(player);
+        player.Ship.name = "Player_" + PlayerCount;
         Players[PlayerCount].Gui.AddComponent<AirTankLogic>().Init(Players[PlayerCount].Ship, 1000f);
         PlayerCount++;
     }
