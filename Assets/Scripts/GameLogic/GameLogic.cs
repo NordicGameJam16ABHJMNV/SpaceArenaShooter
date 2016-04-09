@@ -25,7 +25,7 @@ public class GameLogic: MonoBehaviour
         StartText = GameObject.Find("StartText").GetComponent<Text>();
         QuitText = GameObject.Find("QuitText").GetComponent<Text>();
         TitleText = GameObject.Find("TitleText").GetComponent<Text>();
-        gui = GameObject.Find("StartGUI").GetComponent<GameObject>();
+        gui = GameObject.Find("StartGUI");
 
         myButton = GameObject.Find("Start").GetComponent<Button>();
         myButton.onClick.AddListener(Init);
