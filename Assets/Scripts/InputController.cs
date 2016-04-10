@@ -35,5 +35,11 @@ public class InputController : MonoBehaviour
             }
         }
 
+        //Pressing the start button
+        if(Input.GetKeyDown("joystick button 7"))
+        {
+            GameObject.Find("Game").GetComponent<GameLogic>().GameOver();
+        }
+
     }
 }

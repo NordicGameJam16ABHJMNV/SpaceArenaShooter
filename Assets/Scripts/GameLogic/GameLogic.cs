@@ -72,8 +72,8 @@ public class GameLogic: MonoBehaviour
         }
         Players.Clear();
         PlayerCount = 0;
-        TitleText.text = "Game Over";
         gui.SetActive(true);
+        TitleText.text = "Game Over";
     }
 
     //Return Current Players
