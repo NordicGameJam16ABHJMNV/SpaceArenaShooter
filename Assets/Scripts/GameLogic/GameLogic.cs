@@ -65,7 +65,7 @@ public class GameLogic: MonoBehaviour
     //GameOver or Win
     public void GameOver()
     {
-        for (var i = 0; i <= PlayerCount; i++)
+        for (var i = 0; i < PlayerCount; i++)
         {
             Destroy(Players[i].Gui);
             Destroy(Players[i].Ship);
