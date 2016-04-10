@@ -20,6 +20,9 @@ public class GameLogic: MonoBehaviour
     private Text QuitText;
     private GameObject gui;
 
+    //OtherAssets
+    public GameObject Astroids;
+
     void Start()
     {
         StartText = GameObject.Find("StartText").GetComponent<Text>();
@@ -89,9 +92,12 @@ public class GameLogic: MonoBehaviour
     }
 
     //Comets Drop
-    void Comeths()
+    void CometCreator()
     {
-        //TODO
+       GameObject a = Instantiate(Astroids, new Vector3((float)Random.Range(-(Screen.width/2),Screen.width/2),(float)Random.Range(Screen.height, Screen.height)), Quaternion.identity) as GameObject;
+        var size = Random.Range(100, 300);
+        a.GetComponent<Transform>().localScale = new Vector3(size,size,size);
+        //a.GetComponent<Rigidbody>().velocity
     }
 
     //PowerUps
