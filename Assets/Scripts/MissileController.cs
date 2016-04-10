@@ -5,6 +5,6 @@ public class MissileController : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.05f);
     }
 }
