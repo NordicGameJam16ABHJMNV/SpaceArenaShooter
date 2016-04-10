@@ -17,7 +17,6 @@ public class GameLogic: MonoBehaviour
     public List<Vector3> PlayerGuiPosition = new List<Vector3>(4);
     private Text TitleText;
     private Text StartText;
-    private Text QuitText;
     private GameObject gui;
     private bool hasBooted = false;
 
@@ -27,7 +26,6 @@ public class GameLogic: MonoBehaviour
     void Start()
     {
         StartText = GameObject.Find("StartText").GetComponent<Text>();
-        QuitText = GameObject.Find("QuitText").GetComponent<Text>();
         TitleText = GameObject.Find("TitleText").GetComponent<Text>();
         gui = GameObject.Find("StartGUI");
 

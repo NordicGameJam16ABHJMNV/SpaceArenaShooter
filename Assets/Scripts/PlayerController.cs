@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 100f;
     public float reloadDelay = 1.0f;
     public float bulletspeed = 20.0f;
+    public AudioSource laser;
 
     //AirTank
     private Rigidbody2D body;
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public float AirConsuming = 0.17f;
 
     private bool canShoot = true;
-   
+
     // Use this for initialization
     void Start()
     {
@@ -59,11 +60,12 @@ public class PlayerController : MonoBehaviour
 
         if (Air < 0)
         {
+            GameObject.Find("Main Camera/Kill").GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
         //Consumes Air
         Air = Air - ((AirConsuming + Holes * AirConsuming) * (10 * Time.deltaTime));
-        GameObject.Find(PlayerGui.name + "/Canvas/AirHolder/Air").GetComponent<RectTransform>().sizeDelta = new Vector2(10,Air/10);
+        GameObject.Find(PlayerGui.name + "/Canvas/AirHolder/Air").GetComponent<RectTransform>().sizeDelta = new Vector2(10, Air / 10);
         //Updates Container
     }
 
@@ -78,13 +80,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!(col.collider.tag == "Wall"))
         {
+            GameObject.Find("Main Camera/OnHit").GetComponent<AudioSource>().Play();
             Holes++;
         }
     }
 
     internal void Move(Vector2 input)
     {
-        Vector2 direction = input.y * transform.up;
+        Vector2 direction = input.y * transform.up;        
 
         body.rotation += rotationSpeed * -input.x * Time.deltaTime;
 
@@ -103,6 +106,8 @@ public class PlayerController : MonoBehaviour
             GameObject missile = Instantiate(missilePrefab, missileSpawnPosition, transform.rotation) as GameObject;
             Destroy(missile, 2f);
             missile.GetComponent<Rigidbody2D>().velocity = transform.up * bulletspeed;
+
+            GameObject.Find("Main Camera/Laser").GetComponent<AudioSource>().Play();
         }
     }
 
