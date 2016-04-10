@@ -55,7 +55,10 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Holes++;   
+        if (!(col.collider.tag == "Wall"))
+        {
+            Holes++;
+        }
     }
 
     internal void Move(Vector2 input)
