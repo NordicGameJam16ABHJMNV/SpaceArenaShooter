@@ -19,6 +19,7 @@ public class GameLogic: MonoBehaviour
     private Text StartText;
     private Text QuitText;
     private GameObject gui;
+    private bool hasBooted = false;
 
     void Start()
     {
@@ -37,6 +38,32 @@ public class GameLogic: MonoBehaviour
         while (PlayerCount < 4 && PlayerCount > 0)
         {
             CreatePlayer();
+        }
+        if (hasBooted)
+        {
+            int remainingPlayers = 0;
+            string lastPlayer = "";
+            for (int i = 0; i < 4; i++)
+            {
+                if (GameObject.Find("Player_" + i) != null)
+                {
+                    remainingPlayers++;
+                    lastPlayer = "Player " + (i+1) + " is the last survivor!";
+                }
+            }
+
+            if (remainingPlayers < 2)
+            {
+                
+                GameOver(lastPlayer);
+            }
+        }
+        else
+        {
+            if (GameObject.Find("Player_3") != null)
+            {
+                hasBooted = true;
+            }
         }
     }
 
@@ -63,16 +90,19 @@ public class GameLogic: MonoBehaviour
     }
 
     //GameOver or Win
-    public void GameOver()
+    public void GameOver(string resetReason)
     {
-        for (var i = 0; i <= PlayerCount; i++)
+        hasBooted = false;
+        for (var i = 0; i < PlayerCount; i++)
         {
             Destroy(Players[i].Gui);
             Destroy(Players[i].Ship);
         }
+        Debug.Log(resetReason);
         Players.Clear();
         PlayerCount = 0;
-        TitleText.text = "Game Over";
+        string newTitleText = "Game Over. " + resetReason;
+        TitleText.text = newTitleText;
         gui.SetActive(true);
     }
 
