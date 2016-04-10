@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    //Missiles
     public GameObject missilePrefab;
     public float friction = 1f;
     public float acceleration = 10f;
@@ -10,7 +12,12 @@ public class PlayerController : MonoBehaviour
     public float reloadDelay = 1.0f;
     public float bulletspeed = 20.0f;
 
+    //AirTank
     private Rigidbody2D body;
+    public GameObject PlayerGui;
+    public int Holes = 0;
+    public float Air = 1000;
+    public float AirConsuming = 0.17f;
 
     private bool canShoot = true;
    
@@ -20,24 +27,35 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
+    public void Init(GameObject PlayerGui, float Air)
+    {
+        this.PlayerGui = PlayerGui;
+        this.Air = Air;
+    }
+
     // Update is called once per frame
     void Update()
     {
-//#if UNITY_EDITOR
-//        //Movement is called by InputController script
-//        float xInput = Input.GetAxis("Horizontal");
-//        float yInput = Input.GetAxis("Vertical");
-//        if (Input.GetButton("Fire1"))
-//        {
-//            Shoot();
-//        }
-//        Move(new Vector2(xInput, yInput));
-//#endif
+        if (Air < 0)
+        {
+            Destroy(gameObject);
+        }
+        //Consumes Air
+        Air = Air - ((AirConsuming + Holes * AirConsuming) * (10 * Time.deltaTime));
+        GameObject.Find(PlayerGui.name + "/Canvas/AirHolder/Air").GetComponent<RectTransform>().sizeDelta = new Vector2(10,Air/10);
+        //Updates Container
+    }
+
+    //For Closing holes
+    public void CloseHole(int Number)
+    {
+        if (Holes >= Number)
+            Holes -= Number;
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
+        Holes++;   
     }
 
     internal void Move(Vector2 input)
