@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,6 +37,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        String name = gameObject.name;
+        int playerNumber = int.Parse(name.Substring(name.Length - 1, 1));
+        Light playerLight = GetComponentInChildren<Light>();
+
+        switch (playerNumber)
+        {
+            case 0:
+                playerLight.color = Color.green;
+                break;
+            case 1:
+                playerLight.color = Color.blue;
+                break;
+            case 2:
+                playerLight.color = Color.red;
+                break;
+            case 3:
+                playerLight.color = Color.yellow;
+                break;
+        }
+
         if (Air < 0)
         {
             Destroy(gameObject);
@@ -78,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             canShoot = false;
             StartCoroutine(Reload());
-            Vector3 missileSpawnPosition = transform.position + transform.up * 2;
+            Vector3 missileSpawnPosition = transform.position + transform.up * 3;
             GameObject missile = Instantiate(missilePrefab, missileSpawnPosition, transform.rotation) as GameObject;
             Destroy(missile, 2f);
             missile.GetComponent<Rigidbody2D>().velocity = transform.up * bulletspeed;
